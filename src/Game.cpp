@@ -26,6 +26,34 @@ Game::~Game()
 
 
 //Functions
-void Game::update(){}
-void Game::render(){ }
+const bool Game::running() const
+{
+    return this->window->isOpen();
+}
+void Game::pollEvents()
+{
+    while(this->window->pollEvent(this->sfmlEvent))
+    {
+        if(this->sfmlEvent.type == sf::Event::Closed)
+            this->window->close();
+        if(this->sfmlEvent.type == sf::Event::KeyPressed)
+            if(this->sfmlEvent.key.code == sf::Keyboard::Escape)
+                this->window->close();
+    }
+}
+void Game::update()
+{
+    pollEvents();
+}
+void Game::render()
+{
+    //Clearing the old frame
+    this->window->clear();
 
+    //Render stuf
+    this->player.render(this->window); 
+
+    
+    this->window->display();
+
+}
