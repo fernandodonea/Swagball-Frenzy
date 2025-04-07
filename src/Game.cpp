@@ -9,6 +9,7 @@ void Game::initWindow()
 {
     this->videoMode = sf::VideoMode(800,600);
     this->window = new sf::RenderWindow(this->videoMode, "Game 2", sf::Style::Titlebar | sf::Style::Close);
+    this->window->setFramerateLimit(60);
 }
 
 
@@ -44,6 +45,8 @@ void Game::pollEvents()
 void Game::update()
 {
     pollEvents();
+
+    this->player.update(this->window);
 }
 void Game::render()
 {
@@ -52,8 +55,7 @@ void Game::render()
 
     //Render stuf
     this->player.render(this->window); 
-
-    
+  
     this->window->display();
 
 }
