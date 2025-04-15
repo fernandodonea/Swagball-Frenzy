@@ -16,7 +16,7 @@ class Player
         int health;
         int maxHealth ; 
 
-        int points;
+        
 
         void initVariables();
         void initShape();

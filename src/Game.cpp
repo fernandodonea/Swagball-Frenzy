@@ -8,12 +8,32 @@ void Game::initVariables()
     this->spawnTimer=this->spawnTimerMax;
     this->maxSwagBalls=10;
 
+    this->points=0;
+
+
+
 }
 void Game::initWindow()
 {
     this->videoMode = sf::VideoMode(800,600);
     this->window = new sf::RenderWindow(this->videoMode, "Game 2", sf::Style::Titlebar | sf::Style::Close);
     this->window->setFramerateLimit(60);
+}
+
+void Game::initFont()
+{
+    if(!this->font.loadFromFile("resources/fonts/Dosis.ttf"))
+    {
+        std::cout<<"ERROR: GAME::INITFONT could not load font"<<'\n';
+    }
+   
+}
+void Game::initText()
+{
+    //Gui text init
+    this->guiText.setFont(this->font);
+    this->guiText.setCharacterSize(30);
+
 }
 
 
@@ -23,6 +43,8 @@ Game::Game()
 {
     this->initVariables();
     this->initWindow();
+    this->initFont();
+    this->initText();
 }
 Game::~Game()
 {
@@ -73,8 +95,18 @@ void Game::updateCollision()
         if(this->player.getShape().getGlobalBounds().intersects(this->swagBalls[i].getShape().getGlobalBounds()))
         {
             this->swagBalls.erase(this->swagBalls.begin()+i);
+            this->points++;
         }
      }
+}
+
+void Game::updateGui()
+{
+    std::stringstream ss; 
+    ss << "- Points: "<<this->points;
+
+    this->guiText.setString(ss.str());
+
 }
 
 void Game::update()
@@ -85,6 +117,12 @@ void Game::update()
 
     this->player.update(this->window);
     this->updateCollision();
+    this->updateGui();
+}
+void Game::renderGui(sf::RenderTarget* target)
+{
+    target->draw(this->guiText);
+     
 }
 void Game::render()
 {
@@ -99,6 +137,7 @@ void Game::render()
         i.render(*this->window);
 
     }
+    this->renderGui(this->window);
 
     this->window->display();
 

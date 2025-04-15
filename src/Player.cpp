@@ -6,7 +6,7 @@ void Player::initVariables()
     this->maxHealth=10;
     this->health=this->maxHealth; 
 
-    this->points=0;
+    
     
 }
 void Player::initShape()
