@@ -13,16 +13,16 @@ class SwagBall
     private:
         sf::CircleShape shape;
 
-        void initShape();
+        void initShape(const sf::RenderWindow& window);
      
     public:
         //Constructors and Destructors
-        SwagBall ();
-        virtual ~SwagBall ();
+        SwagBall (const sf::RenderWindow& window);
+        virtual ~SwagBall (); 
 
         //Functions
         void update(); 
-        void render(sf::RenderTarget *target);
+        void render(sf::RenderTarget &target);
 }; 
 
 #endif // SWAGBALL_H

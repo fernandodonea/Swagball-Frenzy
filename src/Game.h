@@ -10,8 +10,10 @@
 
 #include <iostream>
 #include <ctime>
+#include <vector>
 
 #include "Player.h"
+#include "SwagBall.h"
 
 /*
 Class that acts as a game engine
@@ -29,6 +31,11 @@ class Game
 
         Player player;
 
+        std::vector<SwagBall> swagBalls;
+        float spawnTimerMax;
+        float spawnTimer;
+        unsigned maxSwagBalls; 
+
         void initVariables(); 
         void initWindow();
 
@@ -45,6 +52,7 @@ class Game
         const bool running() const;
         void pollEvents();
 
+        void spawnSwagBalls();
         void update();
         void render();
 };
