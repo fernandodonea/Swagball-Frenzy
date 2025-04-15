@@ -53,6 +53,7 @@ class Game
         void pollEvents();
 
         void spawnSwagBalls();
+        void updateCollision();
         void update();
         void render();
 };

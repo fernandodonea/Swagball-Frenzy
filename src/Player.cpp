@@ -2,7 +2,12 @@
 
 void Player::initVariables()
 {
-    this->movementSpeed=10.f;
+    this->movementSpeed=5.f; 
+    this->maxHealth=10;
+    this->health=this->maxHealth; 
+
+    this->points=0;
+    
 }
 void Player::initShape()
 {
@@ -24,6 +29,15 @@ Player::~Player()
 {
  
 }
+
+
+const sf::RectangleShape& Player::getShape() const
+{
+    return this->shape;
+}
+
+
+
 void Player::updateInput()
 {
     //Keyboard input

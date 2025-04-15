@@ -24,6 +24,12 @@ SwagBall::SwagBall (const sf::RenderWindow& window )
     
  }
 
+const sf::CircleShape SwagBall::getShape() const
+{
+    return this->shape;
+}
+
+
 void SwagBall::update()
 {
 

@@ -18,7 +18,9 @@ class SwagBall
     public:
         //Constructors and Destructors
         SwagBall (const sf::RenderWindow& window);
-        virtual ~SwagBall (); 
+        virtual ~SwagBall ();  
+
+        const sf::CircleShape getShape() const;
 
         //Functions
         void update(); 
