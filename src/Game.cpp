@@ -13,7 +13,7 @@ void Game::initVariables()
 void Game::initWindow()
 {
     this->videoMode = sf::VideoMode(800,600);
-    this->window = new sf::RenderWindow(this->videoMode, "Game 2", sf::Style::Titlebar | sf::Style::Close);
+    this->window = new sf::RenderWindow(this->videoMode, "Swagball Frenzy", sf::Style::Titlebar | sf::Style::Close);
     this->window->setFramerateLimit(60);
 }
 
