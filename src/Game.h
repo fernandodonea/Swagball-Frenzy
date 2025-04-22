@@ -36,6 +36,7 @@ class Game
 
         sf::Font font;
         sf::Text guiText;
+        sf::Text endGameText;
 
         std::vector<SwagBall> swagBalls;
         float spawnTimerMax;
@@ -55,6 +56,8 @@ class Game
         ~Game ();
 
         //Accessors
+        const bool& getEndGame() const;
+
 
         //Modifiers 
 
@@ -63,7 +66,9 @@ class Game
         void pollEvents();
 
         void spawnSwagBalls();
+        const int randBallType() const;
 
+        void updatePlayer();
         void updateCollision();
         void updateGui();
         void update();

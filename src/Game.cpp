@@ -29,10 +29,17 @@ void Game::initText()
 {
     //Gui text init
     this->guiText.setFont(this->font);
+    this->guiText.setFillColor(sf::Color::White);
     this->guiText.setCharacterSize(30);
 
-}
+    //End game text
+    this->endGameText.setFont(this->font);
+    this->endGameText.setFillColor(sf::Color::Red);
+    this->endGameText.setCharacterSize(60);
+    this->endGameText.setPosition(sf::Vector2f(20,300));
+    this->endGameText.setString("Game Over!"); 
 
+}
 
 
 // Constructos and Destructors
@@ -48,11 +55,16 @@ Game::~Game()
     delete this->window;
 }
 
+const bool& Game::getEndGame() const
+{
+    return this->endGame; 
+}
+
 
 //Functions
 const bool Game::running() const
 {
-    return this->window->isOpen();
+    return this->window->isOpen() /*&& this->endGame==false*/;
 }
 void Game::pollEvents()
 {
@@ -76,12 +88,34 @@ void Game::spawnSwagBalls()
     {
         if(this->swagBalls.size()<this->maxSwagBalls)
         {
-            this->swagBalls.push_back(SwagBall(*this->window,rand()%SwagBallTypes::NROFTYPES ));  
+            this->swagBalls.push_back(SwagBall(*this->window,this->randBallType()));  
 
             this->spawnTimer+=1.f;
 
         }
     } 
+}
+
+const int Game::randBallType() const
+{
+    int type=SwagBallTypes::DEFAULT;
+    int randValue=rand()%100+1;
+    if(randValue > 60 && randValue<=80)
+        type=SwagBallTypes::DAMAGING;
+    else if(randValue>80 && randValue<=100)
+        type=SwagBallTypes::HEALING;
+
+
+    return type;
+
+}
+
+void Game::updatePlayer()
+{
+    this->player.update(this->window);
+
+    if(this->player.getHp()<=0)
+        this->endGame=true;
 }
 
 void Game::updateCollision()
@@ -130,11 +164,15 @@ void Game::update()
 {
     pollEvents();
 
-    this->spawnSwagBalls();
 
-    this->player.update(this->window);
-    this->updateCollision();
-    this->updateGui();
+    if(this->endGame==false)
+    {
+        this->spawnSwagBalls();
+
+        this->updatePlayer();
+        this->updateCollision();
+        this->updateGui();
+    }
 }
 void Game::renderGui(sf::RenderTarget* target)
 {
@@ -152,10 +190,16 @@ void Game::render()
     for(auto i: this->swagBalls)
     {
         i.render(*this->window);
-
     }
+
+    //Render Gui
     this->renderGui(this->window);
 
+    //Render end text
+    if(this->endGame==true)
+    {
+        this->window->draw(this->endGameText);
+    }
     this->window->display();
 
 }
