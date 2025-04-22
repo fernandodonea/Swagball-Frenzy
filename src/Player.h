@@ -13,10 +13,9 @@ class Player
 
 
         float movementSpeed; 
-        int health;
-        int maxHealth ; 
+        int hp;
+        int hpMax; 
 
-        
 
         void initVariables();
         void initShape();
@@ -27,7 +26,15 @@ class Player
         Player(float x=0.f, float y=0.f);
         virtual ~Player();
 
+        //Accesssors
         const sf::RectangleShape& getShape() const;
+        const int& getHp() const;
+        const int& getHpMax() const;
+
+
+        //Function
+        void takeDamage(const int damage);
+        void gainHealth(const int health);
 
         void updateInput(); 
         void updateWindowBoundsCollision(const sf::RenderTarget * target);

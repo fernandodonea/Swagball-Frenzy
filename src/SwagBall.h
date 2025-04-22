@@ -7,20 +7,25 @@
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
 
+enum SwagBallTypes {DEFAULT=0, DAMAGING, HEALING, NROFTYPES};
+
 
 class SwagBall
 {
     private:
         sf::CircleShape shape;
+        int type;
 
         void initShape(const sf::RenderWindow& window);
      
     public:
         //Constructors and Destructors
-        SwagBall (const sf::RenderWindow& window);
+        SwagBall (const sf::RenderWindow& window, int type);
         virtual ~SwagBall ();  
 
+        //Accesor
         const sf::CircleShape getShape() const;
+        const int& getType() const;
 
         //Functions
         void update(); 
