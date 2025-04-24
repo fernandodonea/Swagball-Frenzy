@@ -43,38 +43,35 @@ class Game
         float spawn_timer;
         unsigned max_swag_balls; 
 
-        void initVariables(); 
-        void initWindow();
-        void initText();
-        void initFont();
+        void _InitVariables(); 
+        void _InitWindow();
+        void _InitText();
+        void _InitFont();
         
-     
-
     public:
         //Constructors and Destructors
         Game ();
         ~Game ();
 
         //Accessors
-        const bool& getEndGame() const;
-
+        const bool& GetEndGame() const;
 
         //Modifiers 
 
         //Functions 
-        const bool running() const;
-        void pollEvents();
+        const bool Running() const;
+        void PollEvents();
 
-        void spawnSwagBalls();
-        const int randBallType() const;
+        void SpawnSwagBalls();
+        const int RandBallType() const;
 
-        void updatePlayer();
-        void updateCollision();
-        void updateGui();
-        void update();
+        void UpdatePlayer();
+        void UpdateCollision();
+        void UpdateGui();
+        void Update();
 
-        void renderGui(sf::RenderTarget* target);
-        void render();
+        void RenderGui(sf::RenderTarget* target);
+        void Render();
 };
 
 #endif // GAME_H

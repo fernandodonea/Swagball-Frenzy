@@ -17,8 +17,8 @@ class Player
         int hp_max; 
 
 
-        void initVariables();
-        void initShape();
+        void _InitVariables();
+        void _InitShape();
 
 
     public:
@@ -27,19 +27,19 @@ class Player
         virtual ~Player();
 
         //Accesssors
-        const sf::RectangleShape& getShape() const;
-        const int& getHp() const;
-        const int& getHpMax() const;
+        const sf::RectangleShape& GetShape() const;
+        const int& GetHp() const;
+        const int& GetHpMax() const;
 
 
         //Function
-        void takeDamage(const int damage);
-        void gainHealth(const int health);
+        void TakeDamage(const int damage);
+        void GainHealth(const int health);
 
-        void updateInput(); 
-        void updateWindowBoundsCollision(const sf::RenderTarget * target);
-        void update(const sf::RenderTarget* target);
-        void render(sf::RenderTarget* target);
+        void UpdateInput(); 
+        void UpdateWindowBoundsCollision(const sf::RenderTarget * target);
+        void Update(const sf::RenderTarget* target);
+        void Render(sf::RenderTarget* target);
 };
 
 

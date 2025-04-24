@@ -1,14 +1,14 @@
 #include "player.h"
 
-void Player::initVariables()
+void Player::_InitVariables()
 {
     this->movement_speed=5.f; 
     this->hp_max=10;
     this->hp=this->hp_max; 
 }
-void Player::initShape()
+void Player::_InitShape()
 {
-    this->shape.setFillColor(sf::Color::Red);
+    this->shape.setFillColor(sf::Color::Magenta);
     this->shape.setSize(sf::Vector2f(50.f, 50.f));
 }
 
@@ -18,8 +18,8 @@ Player::Player(float x, float y)
     this->shape.setPosition(x,y);
 
 
-    this->initVariables();
-    this->initShape();
+    this->_InitVariables();
+    this->_InitShape();
 }
 
 Player::~Player()
@@ -28,23 +28,23 @@ Player::~Player()
 }
 
 
-const sf::RectangleShape& Player::getShape() const
+const sf::RectangleShape& Player::GetShape() const
 {
     return this->shape;
 }
 
-const int& Player::getHp() const
+const int& Player::GetHp() const
 {
     return this->hp;
 }
-const int& Player::getHpMax() const
+const int& Player::GetHpMax() const
 {
     return this->hp_max;
 }
 
 
 //Functions
-void Player::takeDamage(const int damage)
+void Player::TakeDamage(const int damage)
 {
     if(this->hp>=0)
         this->hp-=damage;
@@ -53,7 +53,7 @@ void Player::takeDamage(const int damage)
 
 
 }
-void Player::gainHealth(const int health)
+void Player::GainHealth(const int health)
 {
     if(this->hp < this->hp_max)
         this->hp+=health;
@@ -62,7 +62,7 @@ void Player::gainHealth(const int health)
         this->hp=this->hp_max; 
 }
 
-void Player::updateInput()
+void Player::UpdateInput()
 {
     //Keyboard input
     //Left
@@ -83,7 +83,7 @@ void Player::updateInput()
         this->shape.move(0.f,this->movement_speed);
     }
 }
-void Player::updateWindowBoundsCollision(const sf::RenderTarget * target)
+void Player::UpdateWindowBoundsCollision(const sf::RenderTarget * target)
 {
     //Left
     if(this->shape.getGlobalBounds().left <=0.f) 
@@ -99,16 +99,16 @@ void Player::updateWindowBoundsCollision(const sf::RenderTarget * target)
         this->shape.setPosition(this->shape.getGlobalBounds().left,target->getSize().y-this->shape.getGlobalBounds().height);
 }
 
-void Player::update(const sf::RenderTarget* target)
+void Player::Update(const sf::RenderTarget* target)
 {
 
-    this->updateInput();
+    this->UpdateInput();
 
     //Window bounds collision
-    this->updateWindowBoundsCollision(target);
+    this->UpdateWindowBoundsCollision(target);
     
 }
-void Player::render(sf::RenderTarget * target)
+void Player::Render(sf::RenderTarget * target)
 {
     target->draw(this->shape);
 

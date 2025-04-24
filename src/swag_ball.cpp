@@ -1,7 +1,7 @@
 #include "swag_ball.h"
 
 
-void SwagBall::initShape(const sf::RenderWindow& window )
+void SwagBall::_InitShape(const sf::RenderWindow& window )
 {
     this->shape.setRadius(static_cast<float>(rand()%10+10));
     sf::Color color;
@@ -34,7 +34,7 @@ void SwagBall::initShape(const sf::RenderWindow& window )
 SwagBall::SwagBall (const sf::RenderWindow& window, int type) 
     :type(type)
 {
-    this->initShape(window); 
+    this->_InitShape(window); 
 
 }
  SwagBall::~SwagBall ()
@@ -42,20 +42,20 @@ SwagBall::SwagBall (const sf::RenderWindow& window, int type)
     
  }
 
-const sf::CircleShape SwagBall::getShape() const
+const sf::CircleShape SwagBall::GetShape() const
 {
     return this->shape;
 }
-const int& SwagBall::getType() const
+const int& SwagBall::GetType() const
 {
     return this->type;
 }
 
-void SwagBall::update()
+void SwagBall::Update()
 {
 
 }
-void SwagBall::render(sf::RenderTarget &target)
+void SwagBall::Render(sf::RenderTarget &target)
 {
     target.draw(this->shape);
 }

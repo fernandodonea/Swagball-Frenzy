@@ -10,10 +10,10 @@ int main()
     Game game;
 
     //Game loop
-    while (game.running())
+    while (game.Running())
     {
-        game.update();
-        game.render();
+        game.Update();
+        game.Render();
     }
 
 

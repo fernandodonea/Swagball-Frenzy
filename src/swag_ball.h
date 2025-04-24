@@ -1,5 +1,5 @@
-#ifndef SWAGBALL_H
-#define SWAGBALL_H
+#ifndef SWAG_BALL_H
+#define SWAG_BALL_H
 
 
 #include <SFML/Graphics.hpp>
@@ -16,7 +16,7 @@ class SwagBall
         sf::CircleShape shape;
         int type;
 
-        void initShape(const sf::RenderWindow& window);
+        void _InitShape(const sf::RenderWindow& window);
      
     public:
         //Constructors and Destructors
@@ -24,12 +24,12 @@ class SwagBall
         virtual ~SwagBall ();  
 
         //Accesor
-        const sf::CircleShape getShape() const;
-        const int& getType() const;
+        const sf::CircleShape GetShape() const;
+        const int& GetType() const;
 
         //Functions
-        void update(); 
-        void render(sf::RenderTarget &target);
+        void Update(); 
+        void Render(sf::RenderTarget &target);
 }; 
 
-#endif // SWAGBALL_H
+#endif // SWAG_BALL_H
