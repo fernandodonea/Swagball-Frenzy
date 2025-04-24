@@ -1,6 +1,9 @@
 #include "swag_ball.h"
 
 
+namespace Game_Entities
+{
+
 void SwagBall::_InitShape(const sf::RenderWindow& window )
 {
     this->shape.setRadius(static_cast<float>(rand()%10+10));
@@ -59,3 +62,5 @@ void SwagBall::Render(sf::RenderTarget &target)
 {
     target.draw(this->shape);
 }
+
+} //namespace Game_Entities

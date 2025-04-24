@@ -7,7 +7,7 @@ int main()
     srand(static_cast<unsigned int>(time(0))); 
 
     //Initialise the game object
-    Game game;
+    Game_Engine::Game game;
 
     //Game loop
     while (game.Running())

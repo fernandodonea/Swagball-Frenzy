@@ -1,5 +1,8 @@
 #include "player.h"
 
+namespace Game_Entities
+{
+
 void Player::_InitVariables()
 {
     this->movement_speed=5.f; 
@@ -113,3 +116,5 @@ void Player::Render(sf::RenderTarget * target)
     target->draw(this->shape);
 
 } 
+
+}//namespace Game_Entities

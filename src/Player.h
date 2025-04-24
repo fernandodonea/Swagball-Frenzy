@@ -6,6 +6,9 @@
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
 
+namespace Game_Entities
+{
+
 class Player
 {
     private:
@@ -42,7 +45,7 @@ class Player
         void Render(sf::RenderTarget* target);
 };
 
-
+}//namespace Game_Entities
 
 
 #endif // PLAYER_H

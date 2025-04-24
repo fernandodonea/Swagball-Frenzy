@@ -21,6 +21,7 @@ Class that acts as a game engine
 Wrapper Class
 */
 
+namespace Game_Engine{
 
 class Game
 {
@@ -30,7 +31,7 @@ class Game
         bool end_game;
         sf::Event sfml_event;
 
-        Player player;
+        Game_Entities::Player player;
          
         int points;
 
@@ -38,7 +39,7 @@ class Game
         sf::Text gui_text;
         sf::Text end_game_text;
 
-        std::vector<SwagBall> swag_balls;
+        std::vector<Game_Entities::SwagBall> swag_balls;
         float spawn_timer_max;
         float spawn_timer;
         unsigned max_swag_balls; 
@@ -73,5 +74,7 @@ class Game
         void RenderGui(sf::RenderTarget* target);
         void Render();
 };
+
+}//namespace Game_Engine
 
 #endif // GAME_H

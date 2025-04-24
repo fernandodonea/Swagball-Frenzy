@@ -7,7 +7,13 @@
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
 
+
+namespace Game_Entities
+{
+
+//Enum for the different types of swag balls   
 enum SwagBallTypes {DEFAULT=0, DAMAGING, HEALING, NROFTYPES};
+
 
 
 class SwagBall
@@ -31,5 +37,7 @@ class SwagBall
         void Update(); 
         void Render(sf::RenderTarget &target);
 }; 
+
+} //namespace Game_Entities
 
 #endif // SWAG_BALL_H

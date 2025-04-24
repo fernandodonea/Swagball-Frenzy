@@ -1,5 +1,8 @@
 #include "game.h"
 
+namespace Game_Engine
+{
+
 void Game::_InitVariables()
 {
     this->end_game=false;
@@ -88,7 +91,7 @@ void Game::SpawnSwagBalls()
     {
         if(this->swag_balls.size()<this->max_swag_balls)
         {
-            this->swag_balls.push_back(SwagBall(*this->window,this->RandBallType()));  
+            this->swag_balls.push_back(Game_Entities::SwagBall(*this->window,this->RandBallType()));  
 
             this->spawn_timer+=1.f;
 
@@ -98,12 +101,12 @@ void Game::SpawnSwagBalls()
 
 const int Game::RandBallType() const
 {
-    int type=SwagBallTypes::DEFAULT;
+    int type=Game_Entities::SwagBallTypes::DEFAULT;
     int rand_value=rand()%100+1;
     if(rand_value > 60 && rand_value<=80)
-        type=SwagBallTypes::DAMAGING;
+        type=Game_Entities::SwagBallTypes::DAMAGING;
     else if(rand_value>80 && rand_value<=100)
-        type=SwagBallTypes::HEALING;
+        type=Game_Entities::SwagBallTypes::HEALING;
 
     return type;
 
@@ -126,14 +129,14 @@ void Game::UpdateCollision()
         {
             switch(this->swag_balls[i].GetType())
             {
-                case SwagBallTypes::DEFAULT:
+                case Game_Entities::SwagBallTypes::DEFAULT:
                     //Add points
                     this->points++;
                     break;
-                case SwagBallTypes::DAMAGING:
+                case Game_Entities::SwagBallTypes::DAMAGING:
                     this->player.TakeDamage(1);
                     break;
-                case SwagBallTypes::HEALING:
+                case Game_Entities::SwagBallTypes::HEALING:
                     this->player.GainHealth(1);
                     break;
 
@@ -200,3 +203,5 @@ void Game::Render()
     this->window->display();
 
 }
+
+} //namespace Game_Engine
