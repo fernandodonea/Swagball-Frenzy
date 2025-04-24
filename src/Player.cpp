@@ -1,10 +1,10 @@
-#include "Player.h"
+#include "player.h"
 
 void Player::initVariables()
 {
-    this->movementSpeed=5.f; 
-    this->hpMax=10;
-    this->hp=this->hpMax; 
+    this->movement_speed=5.f; 
+    this->hp_max=10;
+    this->hp=this->hp_max; 
 }
 void Player::initShape()
 {
@@ -39,7 +39,7 @@ const int& Player::getHp() const
 }
 const int& Player::getHpMax() const
 {
-    return this->hpMax;
+    return this->hp_max;
 }
 
 
@@ -55,11 +55,11 @@ void Player::takeDamage(const int damage)
 }
 void Player::gainHealth(const int health)
 {
-    if(this->hp < this->hpMax)
+    if(this->hp < this->hp_max)
         this->hp+=health;
         
-    if(this->hp > this->hpMax)
-        this->hp=this->hpMax; 
+    if(this->hp > this->hp_max)
+        this->hp=this->hp_max; 
 }
 
 void Player::updateInput()
@@ -68,19 +68,19 @@ void Player::updateInput()
     //Left
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
-        this->shape.move(-this->movementSpeed,0.f);
+        this->shape.move(-this->movement_speed,0.f);
     }
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
-        this->shape.move(this->movementSpeed,0.f);
+        this->shape.move(this->movement_speed,0.f);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
-        this->shape.move(0.f,-this->movementSpeed);
+        this->shape.move(0.f,-this->movement_speed);
     }
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-        this->shape.move(0.f,this->movementSpeed);
+        this->shape.move(0.f,this->movement_speed);
     }
 }
 void Player::updateWindowBoundsCollision(const sf::RenderTarget * target)

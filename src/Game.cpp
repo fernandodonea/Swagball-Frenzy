@@ -1,19 +1,19 @@
-#include "Game.h"
+#include "game.h"
 
 void Game::initVariables()
 {
-    this->endGame=false;
+    this->end_game=false;
 
-    this->spawnTimerMax=10.f;
-    this->spawnTimer=this->spawnTimerMax;
-    this->maxSwagBalls=10;
+    this->spawn_timer_max=10.f;
+    this->spawn_timer=this->spawn_timer_max;
+    this->max_swag_balls=10;
 
     this->points=0;
 }
 void Game::initWindow()
 {
-    this->videoMode = sf::VideoMode(800,600);
-    this->window = new sf::RenderWindow(this->videoMode, "Swagball Frenzy", sf::Style::Titlebar | sf::Style::Close);
+    this->video_mode = sf::VideoMode(800,600);
+    this->window = new sf::RenderWindow(this->video_mode, "Swagball Frenzy", sf::Style::Titlebar | sf::Style::Close);
     this->window->setFramerateLimit(60);
 }
 
@@ -28,16 +28,16 @@ void Game::initFont()
 void Game::initText()
 {
     //Gui text init
-    this->guiText.setFont(this->font);
-    this->guiText.setFillColor(sf::Color::White);
-    this->guiText.setCharacterSize(30);
+    this->gui_text.setFont(this->font);
+    this->gui_text.setFillColor(sf::Color::White);
+    this->gui_text.setCharacterSize(30);
 
     //End game text
-    this->endGameText.setFont(this->font);
-    this->endGameText.setFillColor(sf::Color::Red);
-    this->endGameText.setCharacterSize(60);
-    this->endGameText.setPosition(sf::Vector2f(20,300));
-    this->endGameText.setString("Game Over!"); 
+    this->end_game_text.setFont(this->font);
+    this->end_game_text.setFillColor(sf::Color::Red);
+    this->end_game_text.setCharacterSize(60);
+    this->end_game_text.setPosition(sf::Vector2f(20,300));
+    this->end_game_text.setString("Game Over!"); 
 
 }
 
@@ -57,23 +57,23 @@ Game::~Game()
 
 const bool& Game::getEndGame() const
 {
-    return this->endGame; 
+    return this->end_game; 
 }
 
 
 //Functions
 const bool Game::running() const
 {
-    return this->window->isOpen() /*&& this->endGame==false*/;
+    return this->window->isOpen() /*&& this->end_game==false*/;
 }
 void Game::pollEvents()
 {
-    while(this->window->pollEvent(this->sfmlEvent))
+    while(this->window->pollEvent(this->sfml_event))
     {
-        if(this->sfmlEvent.type == sf::Event::Closed)
+        if(this->sfml_event.type == sf::Event::Closed)
             this->window->close();
-        if(this->sfmlEvent.type == sf::Event::KeyPressed)
-            if(this->sfmlEvent.key.code == sf::Keyboard::Escape)
+        if(this->sfml_event.type == sf::Event::KeyPressed)
+            if(this->sfml_event.key.code == sf::Keyboard::Escape)
                 this->window->close();
     }
 }
@@ -82,15 +82,15 @@ void Game::pollEvents()
 void Game::spawnSwagBalls()
 {
     //Timer
-    if(this->spawnTimer<this->spawnTimerMax)
-        this->spawnTimer+=1.f;
+    if(this->spawn_timer<this->spawn_timer_max)
+        this->spawn_timer+=1.f;
     else
     {
-        if(this->swagBalls.size()<this->maxSwagBalls)
+        if(this->swag_balls.size()<this->max_swag_balls)
         {
-            this->swagBalls.push_back(SwagBall(*this->window,this->randBallType()));  
+            this->swag_balls.push_back(SwagBall(*this->window,this->randBallType()));  
 
-            this->spawnTimer+=1.f;
+            this->spawn_timer+=1.f;
 
         }
     } 
@@ -99,10 +99,10 @@ void Game::spawnSwagBalls()
 const int Game::randBallType() const
 {
     int type=SwagBallTypes::DEFAULT;
-    int randValue=rand()%100+1;
-    if(randValue > 60 && randValue<=80)
+    int rand_value=rand()%100+1;
+    if(rand_value > 60 && rand_value<=80)
         type=SwagBallTypes::DAMAGING;
-    else if(randValue>80 && randValue<=100)
+    else if(rand_value>80 && rand_value<=100)
         type=SwagBallTypes::HEALING;
 
 
@@ -115,17 +115,17 @@ void Game::updatePlayer()
     this->player.update(this->window);
 
     if(this->player.getHp()<=0)
-        this->endGame=true;
+        this->end_game=true;
 }
 
 void Game::updateCollision()
 {
      //Check the collision
-     for(size_t i=0;i<swagBalls.size();++i)
+     for(size_t i=0;i<swag_balls.size();++i)
      {
-        if(this->player.getShape().getGlobalBounds().intersects(this->swagBalls[i].getShape().getGlobalBounds()))
+        if(this->player.getShape().getGlobalBounds().intersects(this->swag_balls[i].getShape().getGlobalBounds()))
         {
-            switch(this->swagBalls[i].getType())
+            switch(this->swag_balls[i].getType())
             {
                 case SwagBallTypes::DEFAULT:
                     //Add points
@@ -140,10 +140,8 @@ void Game::updateCollision()
 
             }
 
-            
-
             //Removing the balls
-            this->swagBalls.erase(this->swagBalls.begin()+i);
+            this->swag_balls.erase(this->swag_balls.begin()+i);
             
         }
      }
@@ -156,7 +154,7 @@ void Game::updateGui()
     ss << "- Points: "<<this->points<<"\n"
         <<"-Health:"<<this->player.getHp()<<" / "<<this->player.getHpMax()<<"\n";
 
-    this->guiText.setString(ss.str());
+    this->gui_text.setString(ss.str());
 
 }
 
@@ -165,7 +163,7 @@ void Game::update()
     pollEvents();
 
 
-    if(this->endGame==false)
+    if(this->end_game==false)
     {
         this->spawnSwagBalls();
 
@@ -176,7 +174,7 @@ void Game::update()
 }
 void Game::renderGui(sf::RenderTarget* target)
 {
-    target->draw(this->guiText);
+    target->draw(this->gui_text);
      
 }
 void Game::render()
@@ -187,7 +185,7 @@ void Game::render()
     //Render stuf
     this->player.render(this->window); 
     
-    for(auto i: this->swagBalls)
+    for(auto i: this->swag_balls)
     {
         i.render(*this->window);
     }
@@ -196,9 +194,9 @@ void Game::render()
     this->renderGui(this->window);
 
     //Render end text
-    if(this->endGame==true)
+    if(this->end_game==true)
     {
-        this->window->draw(this->endGameText);
+        this->window->draw(this->end_game_text);
     }
     this->window->display();
 

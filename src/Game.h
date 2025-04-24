@@ -13,8 +13,8 @@
 #include <vector>
 #include <sstream>
 
-#include "Player.h"
-#include "SwagBall.h"
+#include "player.h"
+#include "swag_ball.h"
 
 /*
 Class that acts as a game engine
@@ -25,23 +25,23 @@ Wrapper Class
 class Game
 {
     private:
-        sf::VideoMode videoMode; 
+        sf::VideoMode video_mode; 
         sf::RenderWindow *window; 
-        bool endGame;
-        sf::Event sfmlEvent;
+        bool end_game;
+        sf::Event sfml_event;
 
         Player player;
          
         int points;
 
         sf::Font font;
-        sf::Text guiText;
-        sf::Text endGameText;
+        sf::Text gui_text;
+        sf::Text end_game_text;
 
-        std::vector<SwagBall> swagBalls;
-        float spawnTimerMax;
-        float spawnTimer;
-        unsigned maxSwagBalls; 
+        std::vector<SwagBall> swag_balls;
+        float spawn_timer_max;
+        float spawn_timer;
+        unsigned max_swag_balls; 
 
         void initVariables(); 
         void initWindow();

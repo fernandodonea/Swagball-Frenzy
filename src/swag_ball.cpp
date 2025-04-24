@@ -1,4 +1,4 @@
-#include "SwagBall.h"
+#include "swag_ball.h"
 
 
 void SwagBall::initShape(const sf::RenderWindow& window )
